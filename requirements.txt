@@ -1,0 +1,10 @@
+pip install PySide6
+pip install Pillow
+pip install torch
+pip install torchvision
+pip install opencv-python
+pip install scikit-learn
+pip install tqdm
+pip install matplotlib
+pip install overrides
+python.exe -m pip install --upgrade pip
