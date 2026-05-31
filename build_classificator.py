@@ -649,22 +649,24 @@ class Model(nn.Module):
         for _ in range(epochs_count):
             progress_bar = tqdm(total=count_batches)
 
-            for i in range(len(PhaseTag)):
+            for phase in PhaseTag:
                 current_data = None
 
-                if i == PhaseTag.TRAIN:
-                    current_data = data[0]
-                    self.model.train()
-                    self.train_epoch(current_data.dataloader,loss_fn,progress_bar)
-                    self.model.eval()
-                
-                elif i == PhaseTag.VALIDATE:
-                    current_data = data[1]
-                    self.model.eval()
-                
-                elif i == PhaseTag.TEST:
-                    current_data = data[2]
-                    self.model.eval()
+                match phase:
+        
+                    case PhaseTag.TRAIN:
+                        current_data = data[0]
+                        self.model.train()
+                        self.train_epoch(current_data.dataloader,loss_fn,progress_bar)
+                        self.model.eval()
+
+                    case PhaseTag.VALIDATE:
+                        current_data = data[1]
+                        self.model.eval()
+
+                    case PhaseTag.TEST: # In the last iteration. It was used only for visualisation.
+                        current_data = data[2]
+                        self.model.eval()
                 
                 self.eval_epoch(current_data,loss_fn,progress_bar)
 
