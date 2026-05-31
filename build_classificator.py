@@ -26,6 +26,12 @@ import warnings
 
 warnings.filterwarnings("ignore")
 
+SEED = 42
+
+torch.manual_seed(SEED)
+random.seed(SEED)
+np.random.seed(SEED)
+
 #######################################################################################################################
 
 # SOURCES
